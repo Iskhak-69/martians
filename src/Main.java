@@ -4,7 +4,6 @@ import java.util.Random;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Random random = new Random();
 
         int[] locations = {2, 3, 4}; //locations of cargo
         int[] weights = {150, 250, 313}; //weights of cargo
@@ -55,5 +54,10 @@ public class Main {
         return new int[]{guess1, guess2, guess3};
 
     }
-
+    public static void changeLocations(int[] locations){
+        Random random = new Random();
+        for(int i = 0; i < locations.length; i++) {
+           locations[i] = random.nextInt(10)  + 1;
+        }
+    }
 }
