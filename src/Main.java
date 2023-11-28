@@ -1,45 +1,42 @@
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
         int[] cargoWeights = {150, 250, 313}; //weights of cargo
 
         int attempts = 1;
         boolean isNumberSame = false;
         boolean isAllIncorrect = true;
-        int rightGuess = 0;
 
+        int rightGuess = 0;
+        int[] cargoLocations = {2, 3, 4}; //locations of cargo
+        int[] storedCargoLocations = Arrays.copyOf(cargoLocations, cargoLocations.length); // returns cargoLocation values back
 
         while(isAllIncorrect){
             System.out.println("Attemps: " + attempts + " \nEnter the kilometer marks to check cargo location: ");
             int[] numbers = guessNumbers();
-            int[] cargoLocations = {2, 3, 4}; //locations of cargo
 
             //This loop for check your guesses with the real locations of cargo.
             for(int i = 0; i < cargoLocations.length; i++) {
                 for(int j = 0; j < numbers.length; j++){
-                    if(cargoLocations[i] != numbers[j]){
-                        continue;
-                    }
-                    else{
+                    if(cargoLocations[i] == numbers[j]){
                         isNumberSame = true;
                         cargoLocations[i] = 0;
                         rightGuess++;
                     }
                 }
-
             }
-            if(isNumberSame && rightGuess == 3){
+            if( rightGuess == 3){
                 System.out.println("You guessed " + rightGuess + " kilometer marks. \nYou have found the cargo.");
                 break;
             }
             else{
                 System.out.println("You guessed " + rightGuess + " kilometers marks");
-                rightGuess =  0;
-
+                rightGuess = 0;
             }
 
             if(attempts == 5) {
@@ -48,8 +45,8 @@ public class Main {
                 System.out.println("Cargo have changed location. Try again!");
                 attempts = 0;
             }
+            cargoLocations = Arrays.copyOf(storedCargoLocations, cargoLocations.length);
             attempts++;
-
         }
 
     }
