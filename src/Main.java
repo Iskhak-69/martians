@@ -13,7 +13,7 @@ public class Main {
         boolean isAllIncorrect = true;
 
         int rightGuess = 0;
-        int[] cargoLocations = {2, 3, 4}; //locations of cargo
+        int[] cargoLocations = generateRandomLocations(); //locations of cargo
         int[] storedCargoLocations = Arrays.copyOf(cargoLocations, cargoLocations.length); // returns cargoLocation values back
 
         while(isAllIncorrect){
@@ -30,7 +30,7 @@ public class Main {
                     }
                 }
             }
-            if( rightGuess == 3){
+            if( rightGuess == cargoLocations.length){
                 System.out.println("You guessed " + rightGuess + " kilometer marks. \nYou have found the cargo.");
                 break;
             }
@@ -64,5 +64,13 @@ public class Main {
         for(int i = 0; i < cargoLocations.length; i++) {
            cargoLocations[i] = random.nextInt(6)  + 1;
         }
+    }
+    public static int[] generateRandomLocations() {
+        Random random = new Random();
+        int[] locations = new int[3];
+        for (int i = 0; i < locations.length; i++) {
+            locations[i] = random.nextInt(6) + 1;
+        }
+        return locations;
     }
 }
